@@ -1,0 +1,548 @@
+{% trans_default_domain 'TecnocreacionesVzlaGovernmentBundle' %}
+{% spaceless %}
+<!DOCTYPE html>
+
+<!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js ie7 oldie" lang="{{ app.request.locale }}"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js ie8 oldie" lang="{{ app.request.locale }}"><![endif]-->
+<!--[if (IE 9)&!(IEMobile)]><html class="no-js ie9" lang="{{ app.request.locale }}"><![endif]-->
+<!--[if (gt IE 9)|(gt IEMobile 7)]><!--><html class="no-js linen" lang="{{ app.request.locale }}"><!--<![endif]-->
+
+    <head>
+        <meta charset="utf-8">
+        {% block style_base %}
+            <style>
+              [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+             }
+            </style>
+        {% endblock style_base %}
+        <style>
+        .message-warning {
+            position: fixed;
+            z-index: 999302;
+            text-align: center;
+            top: 0%;
+            font-weight: bold;
+            padding: 5px 5px 5px 5px;
+            background-color: #f7ffb3;
+            border: 1px solid #999999;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            -moz-box-shadow: 0px 0px 2px #000000;
+            -webkit-box-shadow: 0px 0px 2px #000000;
+            box-shadow: 0px 0px 2px #000000;
+            width: 100%;
+            font-size: 15px;
+            color: #6b6b6b;
+        }
+      </style>
+      <script type="text/javascript">
+          var assetPasePath = "{{ asset('') }}";
+      </script>
+      {% block javascript_base %}
+          <script src="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/js/libs/jquery-1.8.2.min.js') }}"></script>
+          <script src="{{ asset('bundles/tecnocreacionesvzlagovernment/jquey_ui/jquery-ui.min.js?v=1') }}"></script>
+      {% endblock javascript_base %}
+    {% block head_base '' %}
+    {% block head_base_post '' %}
+    {% block head '' %}
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=7">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- http://davidbcalhoun.com/2010/viewport-metatag -->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>{{ templateConfig.getTemplateOption('developer','app_title') }} {% block title ''%}</title>
+        <!-- For Modern Browsers -->
+{#        <link rel="shortcut icon" href="{{ asset(templateConfig.getTemplateOption('developer','logo')['icon_png']) }}">#}
+        <!-- For everything else -->
+{#        <link rel="shortcut icon" href="{{ asset(templateConfig.getTemplateOption('developer','logo')['icon_ico']) }}">#}
+{#        <link rel="SHORTCUT ICON" href="{{ asset(templateConfig.getTemplateOption('developer','logo')['icon_ico']) }}">#}
+{#        <link rel="SHORTCUT ICON" href="{{ asset(templateConfig.getTemplateOption('developer','logo')['icon_ico']) }}" type="image/vnd.microsoft.icon">#}
+        <link rel="SHORTCUT ICON" href="{{ asset(templateConfig.getTemplateOption('developer','logo')['icon_ico']) }}" type="image/vnd.microsoft.icon">
+        {# Base #}
+        {% block stylesheets_core %}
+            {% stylesheets 
+
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/reset3860.css' 
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/style3860.css' 
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/colors3860.css' 
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/print3860.css' 
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/4803860.css'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/7683860.css'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/9923860.css'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/12003860.css'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/2x3860.css'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/styles/modal3860.css'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/js/modules/notificationBarModule/notificationBarModule.css'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/css/styles/form3860.css'
+                    '@TecnocreacionesVzlaGovernmentBundle/Resources/assets/css/main.css'
+                    '@TecnocreacionesVzlaGovernmentBundle/Resources/assets/css/gobierno-vzla.css'
+
+                    output='compiled/stylesheets_core.min.css'
+                    filter='uglifycss' filter='cssrewrite' %}
+                 <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        
+
+        <!-- Webfonts -->
+        {% if app.debug %}
+            <link href='{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/css/fonts/font.css?v=1') }}' rel='stylesheet' type='text/css'>
+        {% else %}
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+        {% endif  %}
+
+        <!-- Additional styles -->
+        {% block stylesheets_base %}
+            <link rel="stylesheet" href="{{ asset('bundles/tecnocreacionesvzlagovernment/jquey_ui/jquery-ui.min.css?v=1') }}">
+        {% endblock stylesheets_base %}
+        {% block stylesheets '' %}
+
+        <!-- JavaScript at bottom except for Modernizr -->
+        <script src="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/js/libs/modernizr.custom.js') }}"></script>
+        <!-- For retina screens -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/favicons/apple-touch-icon-retina.png') }}">
+        <!-- For iPad 1-->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/favicons/apple-touch-icon-ipad.png') }}">
+        <!-- For iPhone 3G, iPod Touch and Android -->
+        <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/favicons/apple-touch-icon.png') }}">
+
+        <!-- iOS web-app metas -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/splash/ipad-landscape.png') }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/splash/ipad-portrait.png') }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/splash/iphone.png') }}" media="screen and (max-device-width: 320px)">
+
+        <!-- Microsoft clear type rendering -->
+        <meta http-equiv="cleartype" content="on">
+
+        <!-- IE9 Pinned Sites: http://msdn.microsoft.com/en-us/library/gg131029.aspx -->
+        <meta name="application-name" content="">
+        <meta name="msapplication-tooltip" content="Cross-platform admin template.">
+        <meta name="msapplication-starturl" content="">
+    </head>
+
+    <body ng-controller="MainController" class="clearfix with-menu ">
+        <div ng-controller="MainContentController" >
+        <div id="message_browser" class="message-warning" style="display: none">
+            <span class="icon-info"></span>&nbsp;
+            <span>Este navegador no es compatible con el sistema, recomendamos que use <a href="//www.google.com/chrome" target="_blank">Google Chrome</a> o <a href="//www.mozilla.org/firefox/" target="_blank">Mozilla Firefox</a>.&nbsp;<a href="{{ path('template_support_browsers') }}">(Actualice su navegador)</a></span>
+            <span id="message_browser_close" class="icon-cross-round" style="float: right;margin-right: 20px;cursor: pointer"></span>
+        </div>
+        {% block content %}
+        <!-- Prompt IE 6 users to install Chrome Frame -->
+        <!--[if lt IE 7]><p class="message red-gradient simpler">Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+        
+        <!-- Title bar -->
+            <header role="banner" id="title-bar" class="hidden-on-desktop">
+                <h2>{% block appTitle %}{{ templateConfig.getTemplateOption('developer','app_title') }}{% endblock %}</h2>
+            </header>
+        <!-- Button to open/hide menu -->
+        <a href="javascript:void(0);" id="open-menu"><span>Menu</span></a>
+        <a href="javascript:void(0);" id="menu-label"></a>
+        
+        <!-- Button to open/hide shortcuts -->
+        <div class="hidden-on-desktop">
+            <img class="logo-menu-mobile" src="{{ asset(templateConfig.getTemplateOption('developer','logo')['icon_png']) }}" height="24px" width="24px" />
+        </div>
+        {% block message_loading %}
+            <div class="message-loading {$ notificationBarService.getLoadStatus().error_class $}" ng-show="notificationBarService.getLoadStatus().showStatus">
+                <span ng-hide="true" >Cargando...</span>
+                <span ng-cloak>{$ notificationBarService.getLoadStatus().text $}</span>
+                <span class="loader"></span>
+            </div>
+        {% endblock message_loading %}
+        <!-- Main content -->
+        <section ng-cloak role="main" id="main" class="block main-frontend">
+            <noscript class="message black-gradient simpler">Your browser does not support JavaScript! Some features won't work as expected...</noscript>
+            {% include 'TecnocreacionesVzlaGovernmentBundle:Block:header.html.twig' %}
+            <div  class="content-container">
+                {% block before_body '' %}
+                {% block body %}
+                    {% block mainTitle %}
+
+                        <hgroup id="main-title" class="thin">
+                                <h1>Dashboard</h1>
+                                <h2>nov <strong>10</strong></h2>
+                        </hgroup>
+                    {% endblock %}
+                    Contenido (Sobrescribir el bloque "body")
+                {% endblock %}
+                {% block after_body '' %}
+            </div>
+            {% include 'TecnocreacionesVzlaGovernmentBundle:Block:footer.html.twig' %}
+            {% block dialog %}
+                <div ng-cloak id="dialog-confirm" title="{$ dialog.confirm.title $}">
+                    <p ng-if="dialog.confirm.open"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>{$ dialog.confirm.content $}</p>
+                </div>
+                <div ng-cloak id="dialog-form">
+                    <div id="div-template" ng-include="template.url" onload="templateLoad(template)" ></div>
+                </div>
+            {% endblock dialog %}
+        </section>
+        <!-- End main content -->
+        
+        <!-- Side tabs shortcuts -->
+        {# include 'TecnocreacionesVzlaGovernmentBundle:Template/Developer/Layout:_side-tabs-shortcuts.html.twig' #}
+        
+        <!-- Sidebar/drop-down menu -->
+        {% block sidebar %}
+            {% include 'TecnocreacionesVzlaGovernmentBundle:Template/Developer/Layout:_sidebar-drop-down-menu.html.twig' %}
+        {% endblock sidebar %}
+        <!-- End sidebar/drop-down menu -->
+
+        <!-- JavaScript at the bottom for fast page loading -->
+
+        <!-- Scripts -->
+        <script type="text/javascript">
+                var ConfApp = {};
+                ConfApp.assetPath = "{{ asset('') }}";
+        </script>
+        {% endblock content %}
+            {# Bloque para cargar archivos javascript bases #}
+            {% block javascripts_base '' %}
+            
+            {% block javascript_core %}
+                {# Template base functions #}
+                {% javascripts
+
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/setup.js'
+                    '@TecnocreacionesVzlaGovernmentBundle/Resources/assets/js/main.js'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/developr.navigable.js'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/developr.notify.js'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/developr.scroll.js'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/developr.tooltip.js'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/developr.modal.js'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/libs/tinycon.min.js'
+                    'bundles/tecnocreacionesvzlagovernment/template/developer/js/developr.input.js'
+
+                    output='compiled/javascript_core.min.js'
+                    filter='?uglifyjs2'
+                %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+            {% endblock javascript_core %}
+            
+            {# Bloque para cargar archivos javascript adicionales despues de la base #}
+            {% block javascripts '' %}
+                
+        {# Bloque para escribir javascript #}    
+        {% block javascript '' %}
+        <script type="text/javascript">
+            window.notify.defaults.textOneSimilar = '{{ 'tecnocreaciones_vzla_government.notify.one_similar_notification'|trans }}';
+            window.notify.defaults.textSeveralSimilars = '{{ 'tecnocreaciones_vzla_government.notify.n_similar_notifications'|trans }}';
+            window.notify.defaults.textOneMore = '{{ 'tecnocreaciones_vzla_government.notify.one_more_notification'|trans }}';
+            window.notify.defaults.textSeveralMore = '{{ 'tecnocreaciones_vzla_government.notify.n_more_notifications'|trans }}';
+            // Call template init (optional, but faster if called manually)
+            $.template.init();
+            // If the browser support the Notification API, ask user for permission (with a little delay)
+            if (notify.hasNotificationAPI() && !notify.isNotificationPermissionSet())
+            {
+                setTimeout(function()
+                {
+                    notify.showNotificationPermission('Your browser supports desktop notification, click here to enable them.', function()
+                    {
+                        // Confirmation message
+                        if (notify.hasNotificationPermission())
+                        {
+                            notify('Notifications API enabled!', 'You can now see notifications even when the application is in background', {
+                                icon: '{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/demo/icon.png') }}',
+                                system: true
+                            });
+                        }
+                        else
+                        {
+                            notify('Notifications API disabled!', 'Desktop notifications will not be used.', {
+                                icon: '{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/demo/icon.png') }}'
+                            });
+                        }
+                    });
+
+                }, 2000);
+            }
+            {% for type in ['success', 'error','info'] %}
+                {% for message in app.session.flashbag.get(type) %}
+                    // Gather options
+                    notify('{{ message }}','', {
+                            system:		false,   
+                            autoClose:		7000,
+                            icon:               '{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/icons/icon-'~ type ~'.png') }}',
+                            iconOutside:        false,
+                            closeButton:        true,
+                            showCloseOnHover:	false,
+                            groupSimilar:	true
+                    });
+                {% endfor %}
+            {% endfor %}
+            function Browser() {   
+                // ---- public properties -----
+                this.fullName = 'unknow'; // getName(false);
+                this.name = 'unknow'; // getName(true);
+                this.code = 'unknow'; // getCodeName(this.name);
+                this.fullVersion = 'unknow'; // getVersion(this.name);
+                this.version = 'unknow'; // getBasicVersion(this.fullVersion);
+                this.mobile = false; // isMobile(navigator.userAgent);
+                this.width = screen.width;
+                this.height = screen.height;
+                this.platform =  'unknow'; //getPlatform(navigator.userAgent);
+
+                // ------- init -------    
+                this.init = function() { //operative system, is an auxiliary var, for special-cases
+                    //the first var is the string that will be found in userAgent. the Second var is the common name
+                    // IMPORTANT NOTE: define new navigators BEFORE firefox, chrome and safari
+                    var navs = [
+                        { name:'Opera Mobi', fullName:'Opera Mobile', pre:'Version/' },
+                        { name:'Opera Mini', fullName:'Opera Mini', pre:'Version/' },
+                        { name:'Opera', fullName:'Opera', pre:'Version/' },
+                        { name:'MSIE', fullName:'Microsoft Internet Explorer', pre:'MSIE ' },  
+                        { name:'BlackBerry', fullName:'BlackBerry Navigator', pre:'/' }, 
+                        { name:'BrowserNG', fullName:'Nokia Navigator', pre:'BrowserNG/' }, 
+                        { name:'Midori', fullName:'Midori', pre:'Midori/' }, 
+                        { name:'Kazehakase', fullName:'Kazehakase', pre:'Kazehakase/' }, 
+                        { name:'Chromium', fullName:'Chromium', pre:'Chromium/' }, 
+                        { name:'Flock', fullName:'Flock', pre:'Flock/' }, 
+                        { name:'Galeon', fullName:'Galeon', pre:'Galeon/' }, 
+                        { name:'RockMelt', fullName:'RockMelt', pre:'RockMelt/' }, 
+                        { name:'Fennec', fullName:'Fennec', pre:'Fennec/' }, 
+                        { name:'Konqueror', fullName:'Konqueror', pre:'Konqueror/' }, 
+                        { name:'Arora', fullName:'Arora', pre:'Arora/' }, 
+                        { name:'Swiftfox', fullName:'Swiftfox', pre:'Firefox/' }, 
+                        { name:'Maxthon', fullName:'Maxthon', pre:'Maxthon/' },
+                        // { name:'', fullName:'', pre:'' } //add new broswers
+                        // { name:'', fullName:'', pre:'' }
+                        { name:'Firefox',fullName:'Mozilla Firefox', pre:'Firefox/' },
+                        { name:'Chrome', fullName:'Google Chrome', pre:'Chrome/' },
+                        { name:'Safari', fullName:'Apple Safari', pre:'Version/' }
+                    ];
+
+                    var agent = navigator.userAgent, pre;
+                    //set names
+                    for (i in navs) {
+                       if (agent.indexOf(navs[i].name)>-1) {
+                           pre = navs[i].pre;
+                           this.name = navs[i].name.toLowerCase(); //the code name is always lowercase
+                           this.fullName = navs[i].fullName; 
+                            if (this.name=='msie') this.name = 'iexplorer';
+                            if (this.name=='opera mobi') this.name = 'opera';
+                            if (this.name=='opera mini') this.name = 'opera';
+                            break; //when found it, stops reading
+                        }
+                    }//for
+
+                  //set version
+                    if ((idx=agent.indexOf(pre))>-1) {
+                        this.fullVersion = '';
+                        this.version = '';
+                        var nDots = 0;
+                        var len = agent.length;
+                        var indexVersion = idx + pre.length;
+                        for (j=indexVersion; j<len; j++) {
+                            var n = agent.charCodeAt(j); 
+                            if ((n>=48 && n<=57) || n==46) { //looking for numbers and dots
+                                if (n==46) nDots++;
+                                if (nDots<2) this.version += agent.charAt(j);
+                                this.fullVersion += agent.charAt(j);
+                            }else j=len; //finish sub-cycle
+                        }//for
+                        this.version = parseInt(this.version);
+                    }
+
+                    // set Mobile
+                    var mobiles = ['mobi', 'mobile', 'mini', 'iphone', 'ipod', 'ipad', 'android', 'blackberry'];
+                    for (var i in mobiles) {
+                        if (agent.indexOf(mobiles[i])>-1) this.mobile = true;
+                    }
+                    if (this.width<700 || this.height<600) this.mobile = true;
+
+                    // set Platform        
+                    var plat = navigator.platform;
+                    if (plat=='Win32' || plat=='Win64') this.platform = 'Windows';
+                    if (agent.indexOf('NT 5.1') !=-1) this.platform = 'Windows XP';        
+                    if (agent.indexOf('NT 6') !=-1)  this.platform = 'Windows Vista';
+                    if (agent.indexOf('NT 6.1') !=-1) this.platform = 'Windows 7';
+                    if (agent.indexOf('Mac') !=-1) this.platform = 'Macintosh';
+                    if (agent.indexOf('Linux') !=-1) this.platform = 'Linux';
+                    if (agent.indexOf('iPhone') !=-1) this.platform = 'iOS iPhone';
+                    if (agent.indexOf('iPod') !=-1) this.platform = 'iOS iPod';
+                    if (agent.indexOf('iPad') !=-1) this.platform = 'iOS iPad';
+                    if (agent.indexOf('Android') !=-1) this.platform = 'Android';
+
+                    if (this.name!='unknow') {
+                        this.code = this.name+'';
+                        if (this.name=='opera') this.code = 'op';
+                        if (this.name=='firefox') this.code = 'ff';
+                        if (this.name=='chrome') this.code = 'ch';
+                        if (this.name=='safari') this.code = 'sf';
+                        if (this.name=='iexplorer') this.code = 'ie';
+                        if (this.name=='maxthon') this.code = 'mx';
+                    }
+
+                    //manual filter, when is so hard to define the navigator type
+                    if (this.name=='safari' && this.platform=='Linux') {
+                        this.name = 'unknow';
+                        this.fullName = 'unknow';
+                        this.code = 'unknow';
+                    }
+
+                };//function
+
+                this.init();
+
+            }//Browser class    
+            
+            function version_compare(v1, v2, operator) {
+            //       discuss at: http://phpjs.org/functions/version_compare/
+            //      original by: Philippe Jausions (http://pear.php.net/user/jausions)
+            //      original by: Aidan Lister (http://aidanlister.com/)
+            // reimplemented by: Kankrelune (http://www.webfaktory.info/)
+            //      improved by: Brett Zamir (http://brett-zamir.me)
+            //      improved by: Scott Baker
+            //      improved by: Theriault
+            //        example 1: version_compare('8.2.5rc', '8.2.5a');
+            //        returns 1: 1
+            //        example 2: version_compare('8.2.50', '8.2.52', '<');
+            //        returns 2: true
+            //        example 3: version_compare('5.3.0-dev', '5.3.0');
+            //        returns 3: -1
+            //        example 4: version_compare('4.1.0.52','4.01.0.51');
+            //        returns 4: 1
+
+            this.php_js = this.php_js || {};
+            this.php_js.ENV = this.php_js.ENV || {};
+            // END REDUNDANT
+            // Important: compare must be initialized at 0.
+            var i = 0,
+              x = 0,
+              compare = 0,
+              // vm maps textual PHP versions to negatives so they're less than 0.
+              // PHP currently defines these as CASE-SENSITIVE. It is important to
+              // leave these as negatives so that they can come before numerical versions
+              // and as if no letters were there to begin with.
+              // (1alpha is < 1 and < 1.1 but > 1dev1)
+              // If a non-numerical value can't be mapped to this table, it receives
+              // -7 as its value.
+              vm = {
+                'dev': -6,
+                'alpha': -5,
+                'a': -5,
+                'beta': -4,
+                'b': -4,
+                'RC': -3,
+                'rc': -3,
+                '#': -2,
+                'p': 1,
+                'pl': 1
+              },
+              // This function will be called to prepare each version argument.
+              // It replaces every _, -, and + with a dot.
+              // It surrounds any nonsequence of numbers/dots with dots.
+              // It replaces sequences of dots with a single dot.
+              //    version_compare('4..0', '4.0') == 0
+              // Important: A string of 0 length needs to be converted into a value
+              // even less than an unexisting value in vm (-7), hence [-8].
+              // It's also important to not strip spaces because of this.
+              //   version_compare('', ' ') == 1
+              prepVersion = function (v) {
+                v = ('' + v)
+                  .replace(/[_\-+]/g, '.');
+                v = v.replace(/([^.\d]+)/g, '.$1.')
+                  .replace(/\.{2,}/g, '.');
+                return (!v.length ? [-8] : v.split('.'));
+              };
+            // This converts a version component to a number.
+            // Empty component becomes 0.
+            // Non-numerical component becomes a negative number.
+            // Numerical component becomes itself as an integer.
+            numVersion = function (v) {
+              return !v ? 0 : (isNaN(v) ? vm[v] || -7 : parseInt(v, 10));
+            };
+            v1 = prepVersion(v1);
+            v2 = prepVersion(v2);
+            x = Math.max(v1.length, v2.length);
+            for (i = 0; i < x; i++) {
+              if (v1[i] == v2[i]) {
+                continue;
+              }
+              v1[i] = numVersion(v1[i]);
+              v2[i] = numVersion(v2[i]);
+              if (v1[i] < v2[i]) {
+                compare = -1;
+                break;
+              } else if (v1[i] > v2[i]) {
+                compare = 1;
+                break;
+              }
+            }
+            if (!operator) {
+              return compare;
+            }
+
+            // Important: operator is CASE-SENSITIVE.
+            // "No operator" seems to be treated as "<."
+            // Any other values seem to make the function return null.
+            switch (operator) {
+            case '>':
+            case 'gt':
+              return (compare > 0);
+            case '>=':
+            case 'ge':
+              return (compare >= 0);
+            case '<=':
+            case 'le':
+              return (compare <= 0);
+            case '==':
+            case '=':
+            case 'eq':
+              return (compare === 0);
+            case '<>':
+            case '!=':
+            case 'ne':
+              return (compare !== 0);
+            case '':
+            case '<':
+            case 'lt':
+              return (compare < 0);
+            default:
+              return null;
+            }
+          }
+            var minNavs = {
+                chrome: 20,
+                firefox: 20,
+                safari: 5,
+                iexplorer: 9
+            };
+            var brw = new Browser();
+            $(document).ready(function(){
+                var minNav = null;
+                if(minNavs[brw.name] != undefined){
+                    minNav = minNavs[brw.name];
+                    var compare = version_compare(brw.version,minNav,'>');
+                    var idDiv = 'message_browser';
+                    if(compare == false){
+                        $('#'+idDiv).show();
+                        $('#message_browser_close').on('click',function(){
+                            $('#'+idDiv).hide();
+                        });
+                    }
+                }
+                $('#menu-label').on('click',function(){
+                    $('#open-menu').click();
+                });
+            });
+        </script>
+        {% block javascript_post '' %}
+        </div>
+    </body>
+</html>
+{% endspaceless %}

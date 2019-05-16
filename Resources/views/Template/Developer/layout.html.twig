@@ -1,0 +1,135 @@
+{% extends "TecnocreacionesVzlaGovernmentBundle:Template:Developer/base.html.twig" %}
+
+{% block head_base %}
+{% endblock head_base %}
+
+{% block head_base_post %}
+<script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+<script src="{{ url('bazinga_jstranslation_js') }}"></script>
+<script type="text/javascript">
+/*
+ AngularJS v1.2.26
+ (c) 2010-2014 Google, Inc. http://angularjs.org
+ License: MIT
+*/
+(function(){'use strict';function d(a){return function(){var c=arguments[0],b,c="["+(a?a+":":"")+c+"] http://errors.angularjs.org/1.2.26/"+(a?a+"/":"")+c;for(b=1;b<arguments.length;b++)c=c+(1==b?"?":"&")+"p"+(b-1)+"="+encodeURIComponent("function"==typeof arguments[b]?arguments[b].toString().replace(/ \{[\s\S]*$/,""):"undefined"==typeof arguments[b]?"undefined":"string"!=typeof arguments[b]?JSON.stringify(arguments[b]):arguments[b]);return Error(c)}}(function(a){var c=d("$injector"),b=d("ng");a=a.angular||
+(a.angular={});a.$minErr=a.$minErr||d;return a.module||(a.module=function(){var a={};return function(e,d,f){if("hasOwnProperty"===e)throw b("badname","module");d&&a.hasOwnProperty(e)&&(a[e]=null);return a[e]||(a[e]=function(){function a(c,d,e){return function(){b[e||"push"]([c,d,arguments]);return g}}if(!d)throw c("nomod",e);var b=[],h=[],k=a("$injector","invoke"),g={_invokeQueue:b,_runBlocks:h,requires:d,name:e,provider:a("$provide","provider"),factory:a("$provide","factory"),service:a("$provide",
+"service"),value:a("$provide","value"),constant:a("$provide","constant","unshift"),animation:a("$animateProvider","register"),filter:a("$filterProvider","register"),controller:a("$controllerProvider","register"),directive:a("$compileProvider","directive"),config:k,run:function(a){h.push(a);return this}};f&&k(f);return g}())}}())})(window)})(window);
+//# sourceMappingURL={{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/angular-loader/angular-loader.min.js.map') }}
+
+        // include a third-party async loader library
+        /*!
+          * $script.js JS loader & dependency manager
+          * https://github.com/ded/script.js
+          * (c) Dustin Diaz 2014 | License MIT
+          */
+         !function(n,t){"undefined"!=typeof module&&module.exports?module.exports=t():"function"==typeof define&&define.amd?define(t):this[n]=t()}("$script",function(){function n(n,t){for(var e=0,o=n.length;o>e;++e)if(!t(n[e]))return c;return 1}function t(t,e){n(t,function(n){return!e(n)})}function e(u,r,f){function c(n){return n.call?n():s[n]}function a(){if(!--y){s[v]=1,g&&g();for(var e in m)n(e.split("|"),c)&&!t(m[e],c)&&(m[e]=[])}}u=u[l]?u:[u];var d=r&&r.call,g=d?r:f,v=d?u.join(""):r,y=u.length;return setTimeout(function(){t(u,function n(t,e){return null===t?a():(t=e||null==t||-1!==t.indexOf(".js")||/^https?:\/\//.test(t)||!i?t:i+t+".js",void 0==t?a():p[t]?(v&&(h[v]=1),2==p[t]?a():setTimeout(function(){n(t,!0)},0)):(p[t]=1,v&&(h[v]=1),void o(t,a)))})},0),e}function o(n,t){var e,o=r.createElement("script");o.onload=o.onerror=o[d]=function(){o[a]&&!/^c|loade/.test(o[a])||e||(o.onload=o[d]=null,e=1,p[n]=2,t())},o.async=1,o.src=u?n+(-1===n.indexOf("?")?"?":"&")+u:n,f.insertBefore(o,f.lastChild)}var i,u,r=document,f=r.getElementsByTagName("head")[0],c=!1,l="push",a="readyState",d="onreadystatechange",s={},h={},m={},p={};return e.get=o,e.order=function(n,t,o){!function i(u){u=n.shift(),n.length?e(u,i):e(u,t,o)}()},e.path=function(n){i=n},e.urlArgs=function(n){u=n},e.ready=function(o,i,u){o=o[l]?o:[o];var r=[];return!t(o,function(n){s[n]||r[l](n)})&&n(o,function(n){return s[n]})?i():!function(n){m[n]=m[n]||[],m[n][l](i),u&&u(r)}(o.join("|")),e},e.done=function(n){e([null],n)},e});
+        // load all of the dependencies asynchronously.
+        var baseUrlDependencies = [
+            {% javascripts 
+                   'bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/ng-table/ng-table.js'
+                   'bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/ng-table-export/ng-table-export.js'
+                   'bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/angular-route/angular-route.min.js'
+                   'bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/angular-sanitize/angular-sanitize.min.js'
+                   'bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/angular-resource/angular-resource.min.js'
+
+                   output='compiled/javascript_core_angular.min.js'
+                   filter='uglifyjs2' 
+                %}
+                 '{{ asset_url }}',
+            {% endjavascripts %}
+        ];
+        var baseDependecies = [
+          
+        ];
+        baseDependecies = baseUrlDependencies.concat(baseDependecies);
+        {% block dependenciesAsync %}
+            var dependencies = [
+                    {% javascripts 
+                        'bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/angular-cookies/angular-cookies.min.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/modules/tableFormat1Module.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/modules/sfTranslatorModule.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/modules/notificationBarModule/notificationBarModule.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/modules/notifyModule.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/services.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/controllers.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/filters.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/directives.js'
+                        '@TecnocreacionesVzlaGovernmentBundle/Resources/public/template/developer/angular/app/js/mainApp.js'
+
+                        filter='uglifyjs2' 
+                        output='compiled/javascript_angular_modules.min.js'
+                    %}
+                      '{{ asset_url }}',
+                    {% endjavascripts %}
+                ''
+            ];
+        {% endblock dependenciesAsync %}
+        
+        
+        {# Agrego las dependencias de modulos de angularjs del proyecto #}
+        var myDependencies = {{ templateConfig.getTemplateOption('developer','angular_dependencies')|json_encode()|raw }};
+        var joinDependencias = [];
+        joinDependencias = joinDependencias.concat(baseDependecies);
+        joinDependencias = joinDependencias.concat(myDependencies);
+        joinDependencias = joinDependencias.concat(dependencies);
+        $script('{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/angular/app/bower_components/angular/angular.min.js') }}','base');
+        var modalOpen = null,modalConfirm = null;
+        function getModalOpen(){
+                if(modalOpen === null){
+                    modalOpen = $("#dialog-form");
+                    modalOpen.dialog({
+                                    autoOpen: false,
+                                    height: 700,
+                                    width: "90%",
+                                    modal: true,
+                            buttons: {
+                              "Add": function(){modalOpen.dialog( "close" );},
+                              Cancel: function() {
+                                modalOpen.dialog( "close" );
+                              }
+                            },
+                            close: function() {
+                              //form[ 0 ].reset();
+                              //allFields.removeClass( "ui-state-error" );
+                            }
+                      });
+                }
+                 return modalOpen;
+            }
+            
+            function getModalConfirm(){
+                if(modalConfirm === null){
+                    modalConfirm = $( "#dialog-confirm" ).dialog({
+                        autoOpen: false,
+                        resizable: false,
+                        height:200,
+                        modal: true,
+                        buttons: {
+                          Si: function() {
+                            jQuery( this ).dialog( "close" );
+                          },
+                          No: function() {
+                            jQuery( this ).dialog( "close" );
+                          }
+                        }
+                      });
+                }
+                return modalConfirm;
+            }
+        
+        var extraAngularDependencies = {{ templateConfig.getTemplateOption('developer','angular_modules')|json_encode()|raw }};
+        $script.ready('base',function(){
+            
+            $script(joinDependencias,'bundle');
+            $script.ready('bundle', function() {
+                   jQuery(document).ready(function(){
+                          // when all is done, execute bootstrap angular application
+                          angular.element(document).ready(function() {
+                          angular.bootstrap(document, ['mainApp']);
+                   }); //fin boot angular
+                });//fin ready jquery
+            });//fin ready bundoe
+        });//fin ready base
+      </script>
+{% endblock head_base_post %}

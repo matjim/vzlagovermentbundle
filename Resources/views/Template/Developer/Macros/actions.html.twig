@@ -1,0 +1,38 @@
+{% trans_default_domain 'TecnocreacionesVzlaGovernmentBundle' %}
+
+{% macro create(url,parameters = null) %}
+    {% set domain_translation = 'TecnocreacionesVzlaGovernmentBundle' %}
+    {% set button_register_label = 'tecnocreaciones_vzla_government.register' %}
+    {%  if parameters is not null %}
+        {% if parameters['button_register_label'] is defined %}
+            {% set button_register_label = parameters['button_register_label'] %}
+        {% endif %}
+        {% if parameters['domain_translation'] is defined %}
+            {% set domain_translation = parameters['domain_translation'] %}
+        {% endif %}
+    {% endif %}
+    <div class="field-block button-height" style="margin-left: 2%">
+    <button type="submit" class="button glossy mid-margin-right">
+        <span class="button-icon"><span class="icon-tick"></span></span>
+        {{ button_register_label|trans({},domain_translation) }}
+    </button>
+    <a href="{{ url ? url : app.request.headers.get('referer') }}" class="button glossy">
+        <span class="button-icon red-gradient"><span class="icon-cross-round"></span></span>
+        {{ 'tecnocreaciones_vzla_government.cancel'|trans({},domain_translation) }}
+    </a>
+</div>
+{% endmacro %}
+
+{% macro update(url) %}
+    {% set domain_translation = 'TecnocreacionesVzlaGovernmentBundle' %}
+    <div class="field-block button-height" style="margin-left: 2%">
+        <button type="submit" class="button glossy mid-margin-right">
+            <span class="button-icon"><span class="icon-tick"></span></span>
+            {{ 'tecnocreaciones_vzla_government.save'|trans({},domain_translation) }}
+        </button>
+        <a href="{{ url ? url : app.request.headers.get('referer') }}" class="button glossy">
+            <span class="button-icon red-gradient"><span class="icon-cross-round"></span></span>
+            {{ 'tecnocreaciones_vzla_government.cancel'|trans({},domain_translation) }}
+        </a>
+    </div>
+{% endmacro %}

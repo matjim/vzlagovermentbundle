@@ -1,0 +1,14 @@
+app:
+    backend:
+            menu:
+                sidebar:
+                    home: Home
+                    example: 
+                        main: Example
+                        company: Company
+                        technical_reports: Technical reports
+                        other:
+                            main: Other
+                            admin: Administrator
+                            groups: Groups
+                    support: Support

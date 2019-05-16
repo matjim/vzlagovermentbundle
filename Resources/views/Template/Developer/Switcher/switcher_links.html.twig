@@ -1,0 +1,15 @@
+<ul class="login_locale_chooser">
+    {% for locale in locales %}
+        <li{% if current_locale == locale.locale %} class="login_locale_current"{% endif %}>
+            {% if current_locale == locale.locale %}
+                <span class="tag red-bg" title="{{ locale.locale_current_language|capitalize }}">
+                    {{ locale.locale_current_language|capitalize }}
+                </span>
+            {% else %}
+                <a href="{{ locale.link }}" title="{{ locale.locale_current_language|capitalize }}">
+                    {{ locale.locale_current_language|capitalize }}
+                </a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

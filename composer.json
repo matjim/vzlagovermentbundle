@@ -1,0 +1,29 @@
+{
+    "name": "tecnocreaciones/vzla-government-bundle",
+    "description": "Government layout Venezuela",
+    "keywords": ["government layout venezuela"],
+    "homepage": "https://github.com/tecnocreaciones",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carlos Mendoza",
+            "email": "inhack20@tecnocreaciones.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.1",
+        "lunetics/locale-bundle": "~2.2",
+        "tecnocreaciones/ajax-fos-user-bundle": "@stable",
+        "friendsofsymfony/rest-bundle":"@stable",
+        "jms/serializer-bundle": "@stable",
+        "knplabs/knp-menu-bundle": ">=1.1.0,<3.0.0",
+        "willdurand/js-translation-bundle": "@stable"
+    },
+    "autoload": {
+        "psr-0": { "Tecnocreaciones\\Vzla\\GovernmentBundle": "" }
+    },
+    "target-dir": "Tecnocreaciones/Vzla/GovernmentBundle"
+}

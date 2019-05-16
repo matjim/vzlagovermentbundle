@@ -1,0 +1,152 @@
+{# 
+    Include this file
+    
+        {% include 'TecnocreacionesVzlaGovernmentBundle:Template:Developer/JavaScript/tableExtraInfo.js.twig' %}
+
+    //Example for table extra info methos to override
+    //Add attr to table "get-table-info" and "tr" add atribute "data" in format json
+
+     <table class="table-extra-info" get-table-info="getTableExtraInfo">
+        <tr data='{ example: "description", age: 4}'> ... </tr>
+     </table>
+
+    function getTableExtraInfo(data)
+    {
+        return  '<div class="float-right">' +
+                '<button type="submit" class="button glossy mid-margin-right">' +
+                '<span class="button-icon"><span class="icon-mail"></span></span>' +
+                'Send mail' +
+                '</button>' +
+                '<button type="submit" class="button glossy">' +
+                '<span class="button-icon red-gradient"><span class="icon-cross"></span></span>' +
+                'Remove' +
+                '</button>' +
+                '</div>' +
+                '<strong>Name:</strong> ' + data.name + '<br>' +
+                '<strong>Created at:</strong> ' + data.created_at + '<br>' +
+                '<strong>Updated at:</strong> ' + data.updated_at + '<br>'
+                ;
+    }
+#}
+<script type="text/javascript">
+    var addIconsToTableExtra;
+    $(document).ready(function() {
+         var addEventsToTableExtra = function(){
+             // Table extra info - styled
+            $('.table-extra-info, .table-extra-info-not-open').on('click', 'tbody td,tbody tr td span.open-info-table', function(event)
+            {
+                // Do not process if something else has been clicked
+                if (event.target !== this)
+                {
+                    return;
+                }
+                var tr = $(this).parent();
+                var rows;
+                var getTableInfoFunction = tr.parent().parent().attr('get-table-info');
+                
+                if(getTableInfoFunction == undefined){
+                    tr = $(this).parent().parent();
+                    getTableInfoFunction = tr.parent().parent().attr('get-table-info');
+                }
+                
+                var row = tr.next('.row-drop');
+                // If click on a special row
+                if (tr.hasClass('row-drop'))
+                {
+                    return;
+                }
+
+                // If there is already a special row
+                if (row.length > 0)
+                {
+                    // Un-style row
+                    tr.children().removeClass('glossy color-white');
+
+                    // Remove row
+                    row.remove();
+
+                    return;
+                }
+
+                // Remove existing special rows
+                rows = tr.siblings('.row-drop');
+                if (rows.length > 0)
+                {
+                    // Un-style previous rows
+                    rows.prev().children().removeClass('glossy color-white');
+
+                    // Remove rows
+                    rows.remove();
+                }
+
+                var attrData = tr.attr('data');
+                if(attrData == undefined){
+                    return ;
+                }
+                var data = $.parseJSON(attrData);
+                // Style row
+                tr.children().addClass('glossy color-white');
+                
+                // Add fake row
+                if(getTableInfoFunction != undefined ){
+                    var tableExtraInfo = eval(getTableInfoFunction)(data);
+                }else{
+                    var tableExtraInfo = getTableExtraInfo(data);
+                }
+                $('<tr class="row-drop">' +
+                        '<td colspan="' + tr.children().length + '"><strong>' +
+                        tableExtraInfo +
+                        '</strong></td>' +
+                        '</tr>').insertAfter(tr);
+
+            });
+         };
+         var addHeaderToTableExtra = function(){
+             $.each($('.table-extra-info thead tr'),function(){
+                 var tr = $(this);
+                 if(tr.hasClass('table-extra-booted')){
+                    return ;
+                 }
+                 tr.addClass('table-extra-booted');
+                 tr.prepend('<th style="width:5px">&nbsp;</th>');
+            });
+             $.each($('.table-extra-info tfoot tr'),function(){
+                 var tr = $(this);
+                 if(tr.hasClass('table-extra-booted')){
+                    return ;
+                 }
+                 tr.addClass('table-extra-booted');
+                 tr.prepend('<td style="width:5px">&nbsp;</td>');
+            });
+         };
+         addIconsToTableExtra = function(){
+            $.each($('.table-extra-info tbody tr'),function(){
+                 var tr = $(this);
+                 var attrData = tr.attr('data');
+                if(attrData == undefined){
+                    return ;
+                }
+                if(tr.hasClass('table-pointer')){
+                    return;
+                }
+                tr.addClass('table-pointer');
+                tr.prepend('<td style="width:1%;"><span class="open-info-table icon-down-fat"></span></td>');
+            });
+            $.each($('.table-extra-info-not-open tbody tr'),function(){
+                 var tr = $(this);
+                 var attrData = tr.attr('data');
+                if(attrData == undefined){
+                    return ;
+                }
+                if(tr.hasClass('table-pointer')){
+                    return;
+                }
+                tr.addClass('table-pointer');
+            });
+         };
+         addEventsToTableExtra();
+         addHeaderToTableExtra();
+         addIconsToTableExtra();
+         setTimeout(addIconsToTableExtra,3000);
+    });
+</script>

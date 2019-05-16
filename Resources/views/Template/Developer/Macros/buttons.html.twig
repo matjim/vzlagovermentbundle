@@ -1,0 +1,260 @@
+{% trans_default_domain 'TecnocreacionesVzlaGovernmentBundle' %}
+
+{% macro show(url, message) %}
+<a href="{{ url }}" class="btn btn-default">
+   <i class="glyphicon glyphicon-book"></i><span>{{ message is empty ? 'sms_facilito.show'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro generic(url, message='generic', icon = 'icon-pencil', parameters = {}) %}
+    {% set gradient = 'blue-gradient' %}
+    {% set translation_domain = 'messages' %}
+    {% if parameters['translation_domain'] is defined %}
+        {% set translation_domain = parameters['translation_domain'] %}
+    {% endif  %}
+    {% if parameters['gradient'] is defined %}
+        {% set gradient = parameters['gradient'] %}
+    {% endif  %}
+    <a href="{{ url }}" class="button">
+        <span class="button-icon left-side {{ gradient }}"><span class="{{ icon }}"></span></span>
+        {{ message|trans({},translation_domain) }}
+    </a>
+{% endmacro %}
+    
+{% macro generic_disabled(message='generic', parameters = {}) %}
+    {% set gradient = 'blue-gradient' %}
+    {% set translation_domain = 'messages' %}
+    {% set content = 'messages' %}
+    {% set title = '' %}
+    {% set icon = 'icon-pencil' %}
+    {% if parameters['content'] is defined %}
+        {% set content = parameters['content'] %}
+    {% endif  %}
+    {% if parameters['title'] is defined %}
+        {% set title = parameters['title'] %}
+    {% endif  %}
+    {% if parameters['icon'] is defined %}
+        {% set icon = parameters['icon'] %}
+    {% endif  %}
+    {% if parameters['translation_domain'] is defined %}
+        {% set translation_domain = parameters['translation_domain'] %}
+    {% endif  %}
+    {% if parameters['gradient'] is defined %}
+        {% set gradient = parameters['gradient'] %}
+    {% endif  %}
+    <button type="button" class="button disabled with-tooltip" title="{{ title }}"  onclick="return;">
+        <span class="button-icon left-side {{ gradient }}"><span class="{{ icon }}"></span></span>
+        {{ message|trans({},translation_domain) }}
+    </button>
+{% endmacro %}
+
+{% macro generic_modal(url, message='generic', parameters = {}) %}
+    {% set gradient = 'blue-gradient' %}
+    {% set translation_domain = 'messages' %}
+    {% set content = 'messages' %}
+    {% set icon = 'icon-pencil' %}
+    {% set textSubmit = 'sigtec.send'|trans({},'messages') %}
+    {% set height = 400 %}
+    {% set width = 600 %}
+    {% if parameters['content'] is defined %}
+        {% set content = parameters['content'] %}
+    {% endif  %}
+    {% if parameters['icon'] is defined %}
+        {% set icon = parameters['icon'] %}
+    {% endif  %}
+    {% if parameters['translation_domain'] is defined %}
+        {% set translation_domain = parameters['translation_domain'] %}
+    {% endif  %}
+    {% if parameters['gradient'] is defined %}
+        {% set gradient = parameters['gradient'] %}
+    {% endif  %}
+    {% if parameters['textSubmit'] is defined %}
+        {% set textSubmit = parameters['textSubmit'] %}
+    {% endif  %}
+    {% if parameters['height'] is defined %}
+        {% set height = parameters['height'] %}
+    {% endif  %}
+    {% if parameters['width'] is defined %}
+        {% set width = parameters['width'] %}
+    {% endif  %}
+    {% set idForm = url|hash %}
+    {% set idDialog = "dialog"~idForm %}
+    {% set idButton = "button"~idForm %}
+    <button id="{{ idButton }}" type="button" class="button">
+        <span class="button-icon left-side {{ gradient }}"><span class="{{ icon }}"></span></span>
+        {{ message|trans({},translation_domain) }}
+    </button>
+        <script>
+            $(document).ready(function(){
+                var dialog,form;
+                dialog = $( "#{{ idDialog }}" ).dialog({
+                  autoOpen: false,
+                  height: {{ height }},
+                  width: {{ width }},
+                  modal: true,
+                  buttons: {
+                    "{{ textSubmit }}": function(){
+                        $('#{{ idForm }}').submit();
+                    },
+                    Cancelar: function() {
+                      dialog.dialog( "close" );
+                    }
+                  },
+                  close: function() {
+                  }
+                });
+
+                $( "#{{ idButton }}" ).on( "click", function() {
+                  dialog.dialog( "open" );
+                });
+              });
+          </script>
+  <div id="{{ idDialog }}" title="{{ message|trans({},translation_domain) }}">
+    <form action="{{ url }}" id="{{ idForm }}" method="post" novalidate>
+        {{ content|raw }}
+    </form>
+  </div>
+{% endmacro %}
+
+{% macro generic_confirm(url, message='generic', parameters = {}) %}
+    {% set gradient = 'blue-gradient' %}
+    {% set translation_domain = 'messages' %}
+    {% set icon = 'icon-pencil' %}
+    {% set content = 'messages' %}
+    {% if parameters['content'] is defined %}
+        {% set content = parameters['content'] %}
+    {% endif  %}
+    {% if parameters['translation_domain'] is defined %}
+        {% set translation_domain = parameters['translation_domain'] %}
+    {% endif  %}
+    {% if parameters['gradient'] is defined %}
+        {% set gradient = parameters['gradient'] %}
+    {% endif  %}
+    {% if parameters['icon'] is defined %}
+        {% set icon = parameters['icon'] %}
+    {% endif  %}
+    {% set idForm = url|hash %}
+        <button type="button" class="button" onclick="openPopUpConfirm_{{ idForm }}('{{ idForm }}')">
+            <span class="button-icon left-side {{ gradient }}"><span class="{{ icon }}"></span></span>
+            {{ message|trans({},translation_domain) }}
+        </button>
+        <script type="text/javascript">
+            function openPopUpConfirm_{{ idForm }}(){
+                $.modal.confirm('{{ content|trans({},translation_domain) }}',
+                    function(){
+                        window.location.href = '{{ url }}';
+                    }, 
+                    function(){                    
+                    },
+                    {
+                        textConfirm: '{{ 'tecnocreaciones_vzla_government.yes'|trans({},'messages') }}',
+                        textCancel: '{{ 'tecnocreaciones_vzla_government.no'|trans({},'messages') }}',
+                        title: ' '
+                    }
+                );
+            }
+        </script>
+{% endmacro %}
+
+{# Genera un boton compacto para confirmar #}
+{% macro generic_confirm_compat(url, message='generic', parameters = {}) %}
+    {% set gradient = 'blue-gradient' %}
+    {% set translation_domain = 'messages' %}
+    {% set icon = 'icon-pencil' %}
+    {% set content = 'messages' %}
+    {% if parameters['content'] is defined %}
+        {% set content = parameters['content'] %}
+    {% endif  %}
+    {% if parameters['translation_domain'] is defined %}
+        {% set translation_domain = parameters['translation_domain'] %}
+    {% endif  %}
+    {% if parameters['gradient'] is defined %}
+        {% set gradient = parameters['gradient'] %}
+    {% endif  %}
+    {% if parameters['icon'] is defined %}
+        {% set icon = parameters['icon'] %}
+    {% endif  %}
+    {% set idForm = url|hash %}
+        <button type="button" class="button {{ icon }}" onclick="openPopUpConfirm_{{ idForm }}('{{ idForm }}')">
+            {{ message|trans({},translation_domain) }}
+        </button>
+        <script type="text/javascript">
+            function openPopUpConfirm_{{ idForm }}(){
+                $.modal.confirm('{{ content|trans({},translation_domain)|raw }}',
+                    function(){
+                        window.location.href = '{{ url }}';
+                    }, 
+                    function(){                    
+                    },
+                    {
+                        textConfirm: '{{ 'tecnocreaciones_vzla_government.yes'|trans({},'messages') }}',
+                        textCancel: '{{ 'tecnocreaciones_vzla_government.no'|trans({},'messages') }}',
+                        title: ' '
+                    }
+                );
+            }
+        </script>
+{% endmacro %}
+
+{% macro create(url, message) %}
+<a href="{{ url }}" class="btn btn-sm btn-primary">
+    <i class="glyphicon glyphicon-plus-sign"></i><span>{{ message is empty ? 'sms_facilito.new'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro show(url, message) %}
+<a class="blue pull-left" href="{{ url }}" class="tooltip-info" data-rel="tooltip" title="{{ 'sms_facilito.view'|trans }}">
+    <i class="icon-zoom-in bigger-130"></i>
+</a>
+{% endmacro %}
+{% macro edit(url, message) %}
+<a href="{{ url }}" class="button">
+    <span class="button-icon left-side"><span class="icon-pencil"></span></span>
+    {{ 'tecnocreaciones_vzla_government.edit'|trans }}
+</a>
+{% endmacro %}
+{% macro edit_mini(url, message) %}
+<a class="green pull-left" href="{{ url }}" class="tooltip-success" data-rel="tooltip" title="{{ 'sms_facilito.edit'|trans }}">
+    <i class="icon-pencil bigger-130"></i>
+</a>
+{% endmacro %}
+
+{% macro delete_mini(url, message, tableIdRow = null) %}
+{% set idForm = url|hash %}
+    <a href="" class="button icon-trash with-tooltip confirm" onclick="openDeleteAjax('{{ url }}','{{ tableIdRow }}','{{ message }}')" title="{{ 'tecnocreaciones_vzla_government.delete'|trans }}"></a>
+    {% import 'TecnocreacionesVzlaGovernmentBundle:Template:Developer/Macros/functions.html.twig' as functionsJs %}
+    {{ functionsJs.openDeleteAjax() }}
+{% endmacro %}
+
+{% macro delete_inner_table(url, message, tableIdRow = null,parameters = {}) %}
+{% set deleteSuccessCallback = null %}
+{% set idForm = url|hash %}
+<a href="" class="button icon-trash with-tooltip confirm" onclick="openDeleteAjax('{{ url }}','{{ tableIdRow }}','{{ message }}',{{ parameters|json_encode() }})">{{ 'tecnocreaciones_vzla_government.delete'|trans }}</a>
+    {% import 'TecnocreacionesVzlaGovernmentBundle:Template:Developer/Macros/functions.html.twig' as functionsJs %}
+    {{ functionsJs.openDeleteAjax() }}
+{% endmacro %}
+
+{% macro delete(url, message, disabled=false, modal=true) %}
+{% if disabled %}
+<span class="btn btn-sm btn-danger disabled">
+    <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'tecnocreaciones_vzla_government.delete'|trans : message }}</span>
+</span>
+{% else %}
+    {% set idForm = url|hash %}
+    <button type="button" class="button" onclick="openDelete('{{ idForm }}','{{ message }}')">
+        <span class="button-icon red-gradient left-side"><span class="icon-trash"></span></span>
+        {{ 'tecnocreaciones_vzla_government.delete'|trans }}
+        <form action="{{ url }}" id="{{ idForm }}" method="post" novalidate>
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
+    </button>
+    {% import 'TecnocreacionesVzlaGovernmentBundle:Template:Developer/Macros/functions.html.twig' as functionsJs %}
+    {{ functionsJs.openDeleteNormal() }}
+{% endif %}
+{% endmacro %}
+
+{% macro manage(url, message) %}
+<a href="{{ url }}" class="btn btn-sm btn-success">
+    <i class="glyphicon glyphicon-folder-open"></i><span>{{ message is empty ? 'sms_facilito.manage'|trans : message }}</span>
+</a>
+{% endmacro %}

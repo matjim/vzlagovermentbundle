@@ -1,0 +1,109 @@
+{% macro openDeleteAjax() %}
+    {% if isRender("openDeleteAjax") == false %}
+        <script type="text/javascript">
+            var baseParameters = {
+                refresh: false,
+                deleteSuccessCallback: null
+            };
+            function openDeleteAjax(url,tableIdRow,message,parameters)
+            {
+                var question = "{{ 'tecnocreaciones_vzla_government.question.delete'|trans({},'messages') }}";
+                if(message == "" || message == null){
+                    message = question;
+                }
+                
+                parameters = $.extend(baseParameters,parameters);
+                var successCallback = parameters.deleteSuccessCallback;
+                $.modal.confirm(message, function()
+                {
+                    $.ajax({
+                      type: "POST",
+                      url: url,
+                      data: { _method:'DELETE' }
+                    }).done(function(data){
+                        $.each(data.message,function(index,value){
+                            notify(value,'', {
+                                    system:		false,   
+                                    autoClose:		4000,
+                                    icon:               ConfApp.assetPath + 'bundles/tecnocreacionesvzlagovernment/template/developer/img/icons/icon-success.png',
+                                    iconOutside:        false,
+                                    closeButton:        true,
+                                    showCloseOnHover:	false,
+                                    groupSimilar:	true
+                                });
+                        });
+                        
+                        if (successCallback && typeof(successCallback) === "function") {
+                            successCallback(data);
+                        }
+                        if(parameters.refresh == true){
+                            location.reload();
+                        }else{
+                            if(tableIdRow != ''){
+                                $('#'+tableIdRow).remove();
+                            }
+                        }
+                    }).error(function(response,textStatus,errorThrown){
+                        data = jQuery.parseJSON(response.responseText);
+                        if(data.status != undefined && data.status == 403){
+                           notify('{{ 'Permission Denied!'|trans({},'messages') }}','', {
+                                    system:		false,   
+                                    autoClose:		4000,
+                                    icon:               ConfApp.assetPath + 'bundles/tecnocreacionesvzlagovernment/template/developer/img/icons/icon-error.png',
+                                    iconOutside:        false,
+                                    closeButton:        true,
+                                    showCloseOnHover:	false,
+                                    groupSimilar:	true
+                                });
+                        }
+                        $.each(data.message,function(index,value){
+                            notify(value,'', {
+                                    system:		false,   
+                                    autoClose:		4000,
+                                    icon:               ConfApp.assetPath + 'bundles/tecnocreacionesvzlagovernment/template/developer/img/icons/icon-error.png',
+                                    iconOutside:        false,
+                                    closeButton:        true,
+                                    showCloseOnHover:	false,
+                                    groupSimilar:	true
+                                });
+                        });
+                    });
+
+                }, function()
+                {
+
+                },
+                {
+                    textConfirm: '{{ 'tecnocreaciones_vzla_government.yes'|trans }}',
+                    textCancel: '{{ 'tecnocreaciones_vzla_government.no'|trans }}'
+                });
+        };
+        </script>
+    {% endif %}
+{% endmacro %}
+
+{% macro openDeleteNormal() %}
+    {% if isRender("openDeleteNormal") == false %}
+        <script type="text/javascript">
+            function openDelete(idForm,message)
+            {
+                var question = "{{ 'tecnocreaciones_vzla_government.question.delete'|trans({},'messages') }}";
+                if(message == "" || message == null){
+                    message = question;
+                }
+                $.modal.confirm(message, function()
+                {
+                    $('#'+idForm).submit();
+
+                }, function()
+                {
+
+                },
+                {
+                    textConfirm: '{{ 'tecnocreaciones_vzla_government.yes'|trans }}',
+                    textCancel: '{{ 'tecnocreaciones_vzla_government.no'|trans }}'
+                });
+            };
+        </script>
+    {% endif %}
+{% endmacro %}

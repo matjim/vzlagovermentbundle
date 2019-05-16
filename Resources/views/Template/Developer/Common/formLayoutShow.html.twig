@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets 
+            'bundles/tecnocreacionesvzlagovernment/template/developer/css/styles/switches3860.css'
+
+            filter='uglifycss' filter='cssrewrite'
+            output='compiled/stylesheets_form_show_sigtec.min.css'
+    %}
+         <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}

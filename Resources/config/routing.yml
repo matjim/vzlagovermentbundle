@@ -1,0 +1,5 @@
+template_support_browsers:
+    pattern:  /public/browsers
+    defaults:
+        _controller: TecnocreacionesVzlaGovernmentBundle:Template:browsers
+    requirements: { _method: GET }
